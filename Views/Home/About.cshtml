@@ -1,0 +1,69 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>About</title>
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    
+    <link href="css/modern-business.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <style>
+        #tbody {
+            margin-left:60px;
+            margin-right:60px;
+        }
+        
+    </style>
+    <script>
+        $(function () {
+            $(".on").css("color", "red");
+            $(".on").mouseover(function () {
+                $(".on").css("color", "green");
+            });
+            $(".on").mouseout(function () {
+                $(".on").css("color", "red");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="tbody">
+        @*@Html.TextBox("User", "Rehan", new { @class="on"});
+            @Html.Partial("_TwinHeader");*@
+        <div class="text-left" style="font-size:xx-large; font-weight:bold">About</div>
+        <hr />
+        <div class="text-left" style="font-size:x-large; font-weight:bold; margin-bottom:15px;">
+            Get To Know TwinChef
+        </div>
+        <div class="text-left" style="margin-bottom:15px;">
+            <p style="font-size:large">TwinChef is a new Restaurant that is Loacted in Lahore and provides Food of the highest quality and the provided quality can be matched with the Top-name restaurant Firms. TwinChef has a lot of experience to offer to its customers. Our Chefs have around 25 years of experience so that means quality and hygenic food is our main priority</p>
+            <p style="font-size:large">TwinChef offers all services, be it ordering food online for delivery, under one hub using propriety technology with only the upcoming best restaurant on highest possible discounts.</p>
+        </div>
+        <div class="text-left" style="font-size:x-large; font-weight:bold; margin-bottom:15px;">
+            TwinChef Online Ordering
+        </div>
+        <div class="text-left" style="margin-bottom:15px;">
+            <p style="font-size:large">You can use our online ordering system to place your order in our restaurant and we will deliver the food on time depending on your entered area</p>
+            <p style="font-size:large">Process:</p>
+            <div class="list-group">
+                <div class="list-group-item">Search Your Area in the search tab.</div>
+                <div class="list-group-item">Add your food items that you want in your order</div>
+                <div class="list-group-item">Select payment Method</div>
+                <div class="list-group-item">Enter the code received by SMS</div>
+                <div class="list-group-item">Order would be delivered in the given time.</div>
+                <div class="list-group-item">Enjoy your meal.</div>
+            </div>
+            
+        </div>
+        <div class="label">rehan</div>
+            @Html.Partial("_TwinFooter");
+    </div>
+</body>
+</html>

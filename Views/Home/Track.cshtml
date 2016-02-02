@@ -1,0 +1,74 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Track</title>
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    
+    <link href="css/modern-business.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <style>
+        #tbody {
+            margin-left:60px;
+            margin-right:60px;
+        }
+        #useremail1, #EmailSubmit1 {
+        margin-top:20px;
+        width:300px;
+        height:30px;
+    }
+    </style>
+    <script>
+        $(function () {
+            $("#OrderSubmit").click(function () {
+                $("#wrongorder").html("");
+                if ($("#userorder").val() == "") {
+                    $("#wrongorder").html("*Enter Order Id");
+                }
+                else {
+                    $.ajax({
+                        /* async: false,  this is deprecated*/
+                        url: '/Home/checkOrder',
+                        type: 'POST',
+                        data: { orderid: $("#userorder").val() }
+                    }).success(function (content) {
+                        if (content == "false") {
+                            $("#wrongorder").html("*Enter Valid Order Id")
+                        }
+                        else {
+                            $("#orderstatus").html("Your Order is in " + content + " state.")
+                        }
+                    })
+                .error(function () {
+                    alert("content1");
+                }); /* prevent default when submit button clicked*/
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="tbody">
+            @Html.Partial("_TwinHeader");
+       <div class="text-left" style="font-size:xx-large; font-weight:bold">Track</div>
+        <hr />
+        <div class="input-group" id="first1" style="margin-bottom:20px;">
+          <input id="userorder" type="text" class="form-control" placeholder="Enter Order ID">
+          <div class="btn-group">
+              <button style="width: 200px; background-color:#32CD32; color:white; font-size:medium" id="OrderSubmit" type="button" class="btn btn-default">Track Your Order</button>
+          </div>
+      </div>
+      <div class="text-info" id="wrongorder" style="color:red"></div>
+      <div class="text-info" id="orderstatus"></div>
+  
+            @Html.Partial("_TwinFooter");
+    </div>
+</body>
+</html>

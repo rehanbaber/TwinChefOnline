@@ -1,0 +1,67 @@
+﻿<style>
+    .free {
+        font-size:x-large;
+        font-weight:bolder;
+    }
+    #footright {
+        
+    }
+    #footleft {
+        margin-right:30px;
+
+    }
+    #footleft-text {
+        font-size:20px;
+        margin-top:40px;
+        text-align:justify;
+    }
+    #useremail, #EmailSubmit {
+        margin-top:40px;
+        width:300px;
+        height:50px;
+    }
+</style>
+ 
+<script>
+    $(function () {
+        $("#EmailSubmit").click(function () {
+            
+            if (/^\w+([\.-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($("#useremail").val())) {
+                $("#first").hide("slow");
+                jQuery.getJSON("/Home/EmailsCheck", {"name":$("#useremail").val()}, function (successResult) {
+                    if (successResult == true) {
+                        $("#second").html("Thanku For Subscribing to TwinChefOnline!");
+                        //alert("Good");
+                    }
+                    else {
+                        $("#second").html("You Are Already Subscribed To TwinChefOnline");
+                        //alert("Bad");
+                    }
+                });
+            }
+            else {
+                $("#second1").html("Invalid Email");
+            }
+                
+            
+        });
+    });
+</script>
+<hr />
+<div class="modal-body row">
+  <div class="col-md-6" id="footleft">
+      <span class="free">24/7 Free Online Food Ordering</span>
+      <p id="footleft-text">TwinChefOnline enables diners to order food online for free and pay better prices at great restaurants. Join the 1000s of smart diners who order food in style using our service every day. </p>
+  </div>
+  <div class="col-md-5" id="footright">
+    <span class="free">Love food? Get our weekly discounts!</span>
+      <div class="input-group" id="first">
+          <input id="useremail" type="text" class="form-control" placeholder="Enter Email Here...">
+          <div class="btn-group">
+              <button style="width: 150px; background-color:#32CD32; color:white; font-size:x-large" id="EmailSubmit" type="button" class="btn btn-default">Submit</button>
+          </div>
+      </div>
+      <Label id="second1" style="color:red; font-weight:bolder; margin-top:15px;" ></Label>
+      <label id="second" style="font-size:x-large; font-weight:bolder;margin-top:15px;" ></label>
+  </div>
+</div>

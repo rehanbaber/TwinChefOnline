@@ -1,0 +1,273 @@
+﻿@model TwinChefOnline.Models.TypeAndItems
+
+<meta name="viewport" content="width=device-width" />
+<link href="~/Scripts/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.9.1.min.js"></script>
+<title>Order Main</title>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/autocomplete-0.3.0.min.js"></script>
+<script src="~/Scripts/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#navi").hide();
+    });
+    
+</script>
+<style>
+    #tbody {
+        margin-left: 60px;
+        margin-right: 60px;
+    }
+</style>
+<div id="tbody">
+    @Html.Partial("_TwinHeader");
+    <div id="my-carousel" class="carousel slide" data-ride="carousel" style="margin-left:40px;margin-right:40px; margin-bottom:40px">
+        <ol class="carousel-indicators">
+            <li data-target="#my-carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#my-carousel" data-slide-to="1"></li>
+            <li data-target="#my-carousel" data-slide-to="2"></li>
+            <li data-target="#my-carousel" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <img height="300" width="1920" alt="First slide" style="height:300px" src="~/Controllers/_slider/Chicken_Karahi.png" />
+                @*<img width="1920" alt="First slide" src="~/Content/_slider/Chicken_Karahi.png">*@
+                <div class="carousel-caption">
+                    <div class="text-left free text-center" style="font-size:40px">TwinChef, Lahore</div>
+                </div>
+            </div>
+            <div class="item">
+                <img width="1920" alt="Second slide" style="height:300px" src="~/Controllers/_slider/Fried_Fish.jpg" />
+                @*<img width="1920" alt="Second slide" src="~/Content/_slider/Fried_Fish.jpg">*@
+                <div class="carousel-caption">
+                    <div class="text-left free text-center" style="font-size:40px">TwinChef, Lahore</div>
+                </div>
+            </div>
+            <div class="item">
+                <img height="300" width="1920" alt="Third slide" style="height:300px" src="~/Controllers/_slider/Hot_Burger.jpg" />
+                @*<img width="1920" alt="Third slide" src="~/Content/_slider/Hot_Burger.jpg">*@
+                <div class="carousel-caption">
+                    <div class="text-left free text-center" style="font-size:40px">TwinChef, Lahore</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <img width="1920" alt="Third slide" style="height:300px" src="~/Controllers/_slider/Salad.jpg" />
+                @*<img width="1920" alt="Third slide" src="~/Content/_slider/Salad.jpg">*@
+                <div class="carousel-caption">
+                    <div class="text-left free text-center" style="font-size:40px">TwinChef, Lahore</div>
+                </div>
+            </div>
+        </div>
+
+
+        <a class="left carousel-control" href="#my-carousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#my-carousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+    @{ var i = 0;}
+    <div class="col-md-2">
+        <div style="height:40px; background-color:#32CD32; color:white; padding-top:8px; font-size:20px; font-weight:bold; text-align:center ; margin-top:15px; margin-bottom:20px;">Type</div>
+        @foreach (var v in Model.pr) {
+            <div class="row text-center" style="height:40px; font-weight:bold; padding-top:8px; margin-bottom:8px; background-color:antiquewhite;">
+                <a href="#@i">@v.Name</a>
+                @{ i++;}
+            </div>
+        }
+        @{ i = 0;}
+    </div>
+        <div class="col-md-6">
+            <nav class="navbar navbar-default" role="navigation" style="background-color:#32CD32; color:black; margin-top:10px;">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav" style="font-size:25px; font-family:'Times New Roman'; font-style:italic; color:white">
+                            <li style="width:210px; text-align:center"><a href="#" style="color:white">Menu</a></li>
+                            <li style="width:210px; text-align:center"><a href="#" style="color:white">Reviews</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+            <div>
+                @{ var j = 0;}
+                @for (var v=0; v<Model.pr.Count;v++) {
+                    <div id="@i" style="font-size:20px; margin-bottom:10px; font-weight:bold">@Model.pr[v].Name</div>
+                                i++;
+                                for (var g = 0; g < Model.li.Count;g++) {
+                                    if (Model.pr[v].Name.Equals(Model.li[g].ProductType)) {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="@j" style="font-weight:bold">@Model.li[g].ProductName</div>
+                                    <div class="@j">@Model.li[g].ProductDescription</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center @j">Rs. @Model.li[g].ProductPrice</div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="btn btn-danger text-right @j" onclick="callit('@Model.li[g].ProductName','@Model.li[g].ProductDescription','@Model.li[g].ProductPrice')">Add</div>
+                                </div>
+                            </div>
+                            j++;
+                            <p style="margin-bottom:10px;"></p>
+                            <hr />
+                        }
+                    }
+                }
+           </div>
+    </div>
+    <div class="col-md-4" id="ordermenu">
+        <div style="margin-bottom:20px; height:40px; background-color:#32CD32; color:white; padding-top:8px; font-size:20px; font-weight:bold; text-align:center ; margin-top:15px;">Order</div>
+        <div style="border-radius: 25px; width:initial; text-align:center; background-color:antiquewhite; margin-top:10px; margin-bottom:10px;">
+            <div class="row">
+                <div class="glyphicon glyphicon-map-marker"><label id="area1" style="width:300px; height:30px; font-size:17px; margin-left:10px; border-radius:25px">@Model.area</label> </div>
+            </div>
+            <div class="row" style="margin-top:15px;">
+                <div class="col-md-5"><label class="text-center glyphicon glyphicon-time">@Model.deliverytime mins</label></div>
+                <div class="col-md-5">Rs. <label class="glyphicon glyphicon-usd" id="dfee">@Model.deliveryfee</label></div>
+            </div>
+            <div class="row" style="margin-top:15px;">
+                <div class="list-group" id="items"></div>
+            </div>
+            <div class="row" style="margin-top:15px; text-align:left; margin-left:50px;">
+                Total Amount of Items: Rs. <div id="totalprice">0</div>
+            </div>
+                <div class="row" style="margin-top:15px;">
+                    <input id="proceed" type="submit" value="Proceed To Order" style="width:initial; color:white; font-size:25px; background-color:#32CD32; border-radius:25px; width:300px;" />
+                </div>
+
+            </div>
+        </div>
+    <div class="col-md-4" id="proceededorder">
+        <div style="margin-bottom:20px; height:40px; background-color:#32CD32; color:white; padding-top:8px; font-size:20px; font-weight:bold; text-align:center ; margin-top:15px;">Order</div>
+        <div style="border-radius: 25px; width:initial; text-align:center; background-color:antiquewhite; margin-top:10px; margin-bottom:10px;">
+            <form action="/Home/Index" id="sub">
+                <div class="row">
+                    <div class="glyphicon glyphicon-user"><input id="name" style="width:300px; height:30px; font-size:17px; margin-left:10px; margin-bottom:10px; border-radius:25px" type="text" placeholder="Enter Name..." /></div>
+                </div>
+                <div class="row">
+                    <div class="glyphicon glyphicon-phone"><input id="phone" style="width:300px; height:30px; font-size:17px; margin-left:10px;  margin-bottom:10px; border-radius:25px" type="text" placeholder="Enter Phone..." /></div>
+                </div>
+                <div class="row">
+                    <textarea id="address" rows="3" style="width:300px; font-size:17px; margin-left:10px;  margin-bottom:10px; border-radius:25px" placeholder="Enter Addess..."></textarea>
+                </div>
+                <div class="row">
+                    Sub Total: Rs.<label id="ordersubtotal"></label>
+                </div>
+                <div class="row">
+                    Delivery Amount: Rs.<label id="orderdeliveryamount"></label>
+                </div>
+                <div class="row">
+                    Tax Amount(16%): Rs.<label id="ordertaxamount"></label>
+                </div>
+                <div class="row">
+                    Total Amount: Rs.<label id="ordertotalamount"></label>
+                </div>
+                <div class="row" style="margin-top:15px;">
+                    <input id="placeorder" type="submit" value="Place Order" style="width:initial; color:white; font-size:25px; background-color:#32CD32; border-radius:25px; width:300px;" />
+                </div>
+            </form>
+        </div>
+
+    </div>
+    @Html.Partial("_TwinFooter");
+</div>
+<script>
+    $("#proceededorder").hide();
+    $("#proceed").click(function () {
+        //alert($("#totalprice").html());
+        if($("#totalprice").html()!="0")
+        {
+            $("#proceededorder").show();
+            $("#ordersubtotal").html($("#totalprice").html());
+            $("#orderdeliveryamount").html($("#dfee").html());
+            $("#ordertaxamount").html(parseInt($("#totalprice").html())*0.16);
+            $("#ordertotalamount").html(parseInt($("#totalprice").html()) + parseInt($("#dfee").html()) + (parseInt($("#totalprice").html()) * 0.16));
+            $("#ordermenu").hide();
+        }
+    });
+
+    var $form = $('#sub');
+    $form.find('input[type="submit"]').click(function () {
+        if ($("#name").val() == "" || $("#phone").val() == "" || $("#address").val() == "") {
+            return false;
+        }
+        else {
+            $.ajax({
+                /* async: false,  this is deprecated*/
+                url: '/Order/PlaceOrder',
+                type: 'POST',
+                async: false,
+                data: { name: $("#name").val(), phone: $("#phone").val(), address: $("#address").val(), area: $("#area1").html(), subtotal: $("#ordersubtotal").html(), dfee: $("#orderdeliveryamount").html(), tax: $("#ordertaxamount").html(), totalamount: $("#ordertotalamount").html() }
+            }).success(function (content) {
+                alert("Your Order ID is : " + content);
+                return true;
+            })
+                .error(function () {
+                    alert("content1");
+                }); /* prevent default when submit button clicked*/
+            
+        }
+
+    });
+
+    //$("#placeorder").click(function () {
+    //    if ($("#name").val() == "" || $("#phone").val() == "" || $("#address").val() == "") {
+    //        alert("empty");
+    //    }
+    //    else {
+    //        //alert($("#area1").html());
+    //        $.ajax({
+    //            url: '/Order/PlaceOrder',
+    //            type: 'POST',
+    //            data: { name: $("#name").val(), phone: $("#phone").val(), address: $("#address").val(), area: $("#area1").html() }
+    //            // contentType: 'application/html',
+    //        })
+    //        .success(function (content) {
+    //            alert("Your Order ID is : " + content);
+    //        })
+    //        .error(function () {
+    //            alert("content1");
+    //        });
+    //    }
+    //});
+    function callit(name, description, price) {
+        
+        //alert("."+take);
+    //alert($("."+take).html());
+    $.ajax({
+        url: '/Order/feel',
+        type: 'POST',
+        data: { name1: name, description1: description, price1: price }
+        // contentType: 'application/html',
+    })
+    .success(function (content) {
+        var items = [];
+        var amount = 0;
+        $.each(content, function (key, value) {
+            items.push("<div class='list-group-item'>" + value.Name + ", " + value.Desc + ", " + value.Price + "</li>");
+            amount = amount + parseInt(value.Price);
+        });
+        $("#items").html(items);
+        $("#totalprice").html(amount);
+    })
+    .error(function () {
+        alert("content1");
+    });
+}
+</script>

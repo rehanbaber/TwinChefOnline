@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Jobs</title>
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    
+    <link href="css/modern-business.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <style>
+        #tbody {
+            margin-left:60px;
+            margin-right:60px;
+        }
+        
+    </style>
+</head>
+<body">
+    <div id="tbody">
+            @Html.Partial("_TwinHeader");
+        <div class="text-left" style="font-size:xx-large; font-weight:bold">Jobs</div>
+        <hr />
+        <div class="text-left" style="font-size:x-large; font-weight:bold; margin-bottom:15px;">
+            We Want You
+        </div>
+        <div class="text-left" style="margin-bottom:15px;">
+            <p style="font-size:large">If You want to work with TwinChef as Chef Or Helper than you can send Your Resume at rehanbaber19@gmail.com. You will be contacted if we need you.</p>
+            
+        </div>
+            @Html.Partial("_TwinFooter");
+    </div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Scripts/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/autocomplete-0.3.0.min.js"></script>
+    <script src="~/Scripts/jquery-ui.js"></script>
+   
+    <script>
+        //alert("rehan");
+        $(function () {
+
+            var items = [];
+            jQuery.getJSON("/Home/cities", function (successResult) {
+                $.each(successResult, function (key, val) {
+                    //$("#reh").text();
+                    items.push(val);
+                });
+            });
+            $("#cit").autocomplete({
+                source: items
+            });
+            var $form = $('#sub');
+
+            $form.find('input[type="submit"]').click(function () {
+                $("#invalidcity").html("");
+                $.ajax({
+                    /* async: false,  this is deprecated*/
+                    type: "POST",
+                    url: "/Home/cities1",
+                    data: { "name": $("#cit").val() }
+                }).success(function (response) {
+                    //alert(response); //Got 'ok'
+                    if (response == true) {
+                        /*  submit the form*/
+                        //alert(response);
+                        $form.submit();
+                    } else {
+                        //alert("Oh, string is wrong. Form Submit is cancelled.");
+                        $("#invalidcity").html("Invalid Area");
+                    }
+                }); /* prevent default when submit button clicked*/
+                return false;
+
+            });
+
+        });
+    </script>
+    <style>
+        #tbody {
+            margin-left:60px;
+            margin-right:60px;
+        }
+        .ent {
+            margin-top:100px;
+            padding-top:15px;
+            padding-bottom:15px;
+            padding-left:30px;
+            padding-right:30px;
+            background-color:green;
+            color:white;
+            height:60px;
+            width:300px;
+            font-size:20px;
+            border-radius: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div id="tbody">
+        
+        <div id="reh"></div>
+            @Html.Partial("_TwinHeader");
+        <div class="col-md-12 text-center" style="font-size:25px; font-family:'Arial Monospaced'; margin-top: 100px ; font-weight:bold" >
+            Online Ordering In Lahore Anywhere Anytime!
+        </div>
+        
+        <div class="text-danger text-center" style="margin-bottom:100px;">
+            <form action="/Home/Ordering" method="post" id="sub">
+                <input id="cit" type="text" class="ent" name="area" placeholder="Enter Your Area..."/>
+                <input class="ent" type="submit" value="Submit" style="width:150px; background-color:#32CD32" id="scity"/>
+                <p class="text-center" id="invalidcity" style="color:red"></p>
+            </form>
+        </div>
+            @Html.Partial("_TwinFooter");
+    </div>
+    <script>
+        
+    </script>
+</body>
+</html>

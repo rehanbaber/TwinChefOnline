@@ -1,0 +1,94 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Contact</title>
+<script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    
+    <link href="css/modern-business.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <style>
+        #tbody {
+            margin-left:60px;
+            margin-right:60px;
+        }
+        
+    </style>
+    <script>
+        $(function () {
+            $("#sub").click(function () {
+                var a = true;
+                $("#one").html("");
+                $("#two").html("");
+                $("#three").html("");
+                $("#four").html("");
+                if ($("#conname").val() == "") {
+                    $("#one").html("Enter Name");
+                    a = false;
+                }
+                if ($("#conemail").val() == "") {
+                    $("#two").html("Enter Email");
+                    a = false;
+                }
+                if ($("#conphone").val() == "") {
+                    $("#three").html("Enter Phone Number");
+                    a = false;
+                }
+                if ($("#conmessage").val() == "") {
+                    $("#four").html("Enter Message");
+                    a = false;
+                }
+                if (/^\w+([\.-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($("#conemail").val())) {
+                    $("#two").html("Invalid Email");
+                    a = false;
+                }
+                if(a==true)
+                {
+                    $("#formhide").hide("slow");
+                    $("#late").html("Thanku for Your Contact. Our Services team will contact you within a few hours.")
+                }
+            });
+
+        });
+    </script>
+</head>
+<body">
+    <div id="tbody">
+            @Html.Partial("_TwinHeader");
+       <div class="text-left" style="font-size:xx-large; font-weight:bold">Contact</div>
+        <hr />
+       <div class="text-left" style="margin-bottom:15px;">
+            <p style="font-size:large">If You want to contact us by phone than call us at 03244005001..</p>
+                </div>
+        <div id="formhide">
+            <div class="form-group">
+                <input type="text" class="form-control" id="conname" placeholder="*Name">
+                <span class="danger" style="color:red; font-size:medium" id="one"></span>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="conemail" placeholder="*Email">
+                <span class="danger" style="color:red; font-size:medium" id="two"></span>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="conphone" placeholder="*Phone Number">
+                <span class="danger" style="color:red; font-size:medium" id="three"></span>
+            </div>
+            <div class="form-group">
+                @*<input type="text" class="form-control" id="conmessage" placeholder="*Message" style="height:200px">*@
+                <textarea class="form-control" rows="5" placeholder="*Message" id="conmessage"></textarea>
+                <span class="text-danger" style="color:red; font-size:medium" id="four"></span>
+            </div>
+            <button type="button" class="btn btn-default" id="sub">Submit</button>
+        </div>
+        <div style="margin-top:20px; font-size:large"><p id="late" ></p></div>
+            @Html.Partial("_TwinFooter");
+    </div>
+</body>
+</html>

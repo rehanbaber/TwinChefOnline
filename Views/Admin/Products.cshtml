@@ -1,0 +1,80 @@
+﻿@model TwinChefOnline.Models.Product
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Products</title>
+    <link href="~/Scripts/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.9.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/autocomplete-0.3.0.min.js"></script>
+<script src="~/Scripts/jquery-ui.js"></script>
+    <script src="~/Scripts/Chart.min.js"></script>
+  
+</head>
+<body>
+    <div>
+        @Html.Partial("_TwinAdminHeader");
+    </div>
+    s
+    <div class="col-md-6">
+        <div class="row">
+            <h3 style="text-align:center;">Add Product</h3>
+        </div>
+        @using (Html.BeginForm("AddProduct", "Admin", FormMethod.Post))
+        {
+            @Html.ValidationSummary(true);
+            <div class="row">
+               
+            @Html.LabelFor(Model=>Model.Name);
+            @Html.EditorFor(Model=>Model.Name);
+            @Html.ValidationMessageFor(Model=>Model.Name);
+                </div>
+            <div class="row">
+            @Html.LabelFor(Model => Model.Description);
+            @Html.TextBoxFor(Model => Model.Description);
+            @Html.ValidationMessageFor(Model => Model.Description);
+            </div>
+            <div class="row">
+            @Html.LabelFor(Model => Model.Price);
+            @Html.TextBoxFor(Model => Model.Price);
+            @Html.ValidationMessageFor(Model => Model.Price);
+            </div>
+            <div class="row">
+            <input type="submit" class="btn" style="background-color:yellowgreen" value="Add Product"/>
+                </div>
+        }
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <h3 style="text-align:center;">Delete Product</h3>
+            @using (Html.BeginForm("DelProduct", "Admin", FormMethod.Post))
+            {
+                @Html.ValidationSummary(true);
+                <div class="row">
+
+                    @Html.LabelFor(Model => Model.Name);
+                    @Html.EditorFor(Model => Model.Name);
+                    @Html.ValidationMessageFor(Model => Model.Name);
+                </div>
+                
+                <div class="row">
+                    <input type="submit" class="btn" style="background-color:yellowgreen" value="Delete Product" />
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <h1>Products Chart</h1>
+        <br />
+        
+    </div>
+    <canvas id="#my_canvas" height="256" width="256"></canvas>      
+</body>
+</html>
