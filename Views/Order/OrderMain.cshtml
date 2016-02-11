@@ -158,13 +158,13 @@
         <div style="border-radius: 25px; width:initial; text-align:center; background-color:antiquewhite; margin-top:10px; margin-bottom:10px;">
             <form action="/Home/Index" id="sub">
                 <div class="row">
-                    <div class="glyphicon glyphicon-user"><input id="name" style="width:300px; height:30px; font-size:17px; margin-left:10px; margin-bottom:10px; border-radius:25px" type="text" placeholder="Enter Name..." /></div>
+                    <div class="glyphicon glyphicon-user"><input id="name" style="width:300px; height:30px; font-size:17px; margin-left:10px; margin-bottom:10px; border-radius:25px" type="text" placeholder="Enter Name..." /><div id="namecheck"></div></div>
                 </div>
                 <div class="row">
-                    <div class="glyphicon glyphicon-phone"><input id="phone" style="width:300px; height:30px; font-size:17px; margin-left:10px;  margin-bottom:10px; border-radius:25px" type="text" placeholder="Enter Phone..." /></div>
+                    <div class="glyphicon glyphicon-phone"><input id="phone" style="width:300px; height:30px; font-size:17px; margin-left:10px;  margin-bottom:10px; border-radius:25px" type="text" placeholder="Enter Phone..." /><div id="phonecheck"></div></div>
                 </div>
                 <div class="row">
-                    <textarea id="address" rows="3" style="width:300px; font-size:17px; margin-left:10px;  margin-bottom:10px; border-radius:25px" placeholder="Enter Addess..."></textarea>
+                    <textarea id="address" rows="3" style="width:300px; font-size:17px; margin-left:10px;  margin-bottom:10px; border-radius:25px" placeholder="Enter Addess..."></textarea><div id="addresscheck"></div>
                 </div>
                 <div class="row">
                     Sub Total: Rs.<label id="ordersubtotal"></label>
@@ -204,7 +204,24 @@
 
     var $form = $('#sub');
     $form.find('input[type="submit"]').click(function () {
-        if ($("#name").val() == "" || $("#phone").val() == "" || $("#address").val() == "") {
+        var i = 0;
+        $("#namecheck").html("");
+        $("#phonecheck").html("");
+        $("#addresscheck").html("");
+        if ($("#name").val().length < 5) {
+            $("#namecheck").html("Enter complete name");
+            i = 1;
+        }
+        alert($("#phone").val().length != 11);
+        if ($("#phone").val().length != 11 || $("#phone").val().match(/^\d+$/)==false) {
+            $("#phonecheck").html("Phone Number should contain only Numbers and should be 11 letters long");
+            i = 1;
+        }
+        if ($("#address").val().length < 20) {
+            $("#addresscheck").html("Enter Complete address");
+            i = 1;
+        }
+        if (i == 1) {
             return false;
         }
         else {
@@ -219,9 +236,9 @@
                 return true;
             })
                 .error(function () {
-                    alert("content1");
+                    alert("Order Not Placed");
                 }); /* prevent default when submit button clicked*/
-            
+
         }
 
     });
